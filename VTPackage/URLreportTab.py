@@ -10,12 +10,12 @@ class URLreportTab:
 
         # using the tkinter grid layout manager
         self.mainVTURLframe.grid(column=0, row=0, padx=8, pady=4)
-        ttk.Label(self.mainVTURLframe, text="URL:").grid(column=0, row=0, sticky='W')  # TODO: What does sticky does?      Sticky sayes where to stick : N,S,E
+        ttk.Label(self.mainVTURLframe, text="URL:").grid(column=0, row=0, sticky='W')  #What does sticky does?      Sticky sayes where to stick the label to : N,S,E,W
         urlEntry = ttk.Entry(self.mainVTURLframe)
         urlEntry.grid(column=1, row=0, sticky='E')
 
         ttk.Label(self.mainVTURLframe, text="URL:").grid(column=0, row=0,
-                                                    sticky='W')  # TODO: What does sticky does?      Sticky sayes where to stick : N,S,E
+                                                    sticky='W')
         urlEntry = ttk.Entry(self.mainVTURLframe)
         urlEntry.grid(column=1, row=0, sticky='E')
 
@@ -34,9 +34,13 @@ class URLreportTab:
         ErrorEntry = ttk.Entry(notificationFrame, width=20, textvariable=Error, state='readonly')
         ErrorEntry.grid(column=1, row=0, sticky='W')
 
+        def cleanErrorMessage():  # We could have been doing this without a function, but it is more neat that way
+            Error.set("")
 
-        def getReport(self):
+
+        def getReport():
             try:
+                cleanErrorMessage() # Starting with cleaning the error message bar
                 if not urlEntry.get():
                     print('Please enter a URL')
                     Error.set("Please enter a URL!")
@@ -50,5 +54,7 @@ class URLreportTab:
             except Exception as e:
                 print(e)
                 Error.set(e)
+
+        checkURLinVTButton = ttk.Button(self.mainVTURLframe, text='Check in VT!', command=getReport).grid(column=2, row=0)
 
 

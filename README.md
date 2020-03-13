@@ -1,5 +1,6 @@
 # virusTotal-ui-python
 Study Python & Cyber Security by implementing Virus Total functions in a tkinter UI!
+
 This project demonstrates how to build a VirusTotal client which is using the VirusTotal REST API, together with a tkinter UI.
 Good for the understanding of:
 - REST API's

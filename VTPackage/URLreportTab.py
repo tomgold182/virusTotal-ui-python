@@ -2,7 +2,7 @@ from tkinter import ttk
 from tkinter import StringVar
 
 class URLreportTab:
-    def __init__(self,root,frame,vtClient):
+    def __init__(self,root,frame, vtClient):
         self.root = root
         self.frame = frame
         self.mainVTURLframe = ttk.LabelFrame(frame, text=' Virus Total UI!')
@@ -14,8 +14,7 @@ class URLreportTab:
         urlEntry = ttk.Entry(self.mainVTURLframe)
         urlEntry.grid(column=1, row=0, sticky='E')
 
-        ttk.Label(self.mainVTURLframe, text="URL:").grid(column=0, row=0,
-                                                    sticky='W')
+        ttk.Label(self.mainVTURLframe, text="URL:").grid(column=0, row=0, sticky='W')
         urlEntry = ttk.Entry(self.mainVTURLframe)
         urlEntry.grid(column=1, row=0, sticky='E')
 
@@ -23,6 +22,11 @@ class URLreportTab:
         Positive = StringVar()
         PositiveEntry = ttk.Entry(self.mainVTURLframe, width=20, textvariable=Positive, state='readonly')
         PositiveEntry.grid(column=1, row=1, sticky='W')
+
+        ttk.Label(self.mainVTURLframe, text="Detections:").grid(column=0, row=2, sticky='W')  # <== right-align
+        detections = StringVar()
+        detectionsEntry = ttk.Entry(self.mainVTURLframe, width=20, textvariable=detections, state='readonly')
+        detectionsEntry.grid(column=1, row=2, sticky='W')
 
 
         notificationFrame = ttk.LabelFrame(self.frame, text=' Notifications', width=40)
@@ -51,6 +55,12 @@ class URLreportTab:
                 print(response)
                 Positive.set(response["positives"])
                 scans = response["scans"]
+                findings = set()
+                for key,value in scans.items():
+                    if value["detected"]:
+                        findings.add(value["result"])
+                detections.set(",".join([str(finding) for finding in findings]) )
+
             except Exception as e:
                 print(e)
                 Error.set(e)

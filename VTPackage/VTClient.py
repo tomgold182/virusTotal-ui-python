@@ -15,7 +15,7 @@ class VTClient:
                 raise Exception("To much API requests")
             info = response.json()
             if info["response_code"] == 0:
-                raise Exception(response["verbose_msg"])
+                raise Exception(info["verbose_msg"])
             return info
         except Exception as e:
             print(e)

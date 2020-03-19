@@ -23,10 +23,7 @@ class URLreportTab:
         PositiveEntry = ttk.Entry(self.mainVTURLframe, width=20, textvariable=Positive, state='readonly')
         PositiveEntry.grid(column=1, row=1, sticky='W')
 
-        ttk.Label(self.mainVTURLframe, text="Detections:").grid(column=0, row=2, sticky='W')  # <== right-align
-        detections = StringVar()
-        detectionsEntry = ttk.Entry(self.mainVTURLframe, width=20, textvariable=detections, state='readonly')
-        detectionsEntry.grid(column=1, row=2, sticky='W')
+
 
 
         notificationFrame = ttk.LabelFrame(self.frame, text=' Notifications', width=40)
@@ -55,11 +52,7 @@ class URLreportTab:
                 print(response)
                 Positive.set(response["positives"])
                 scans = response["scans"]
-                findings = set()
-                for key,value in scans.items():
-                    if value["detected"]:
-                        findings.add(value["result"])
-                detections.set(",".join([str(finding) for finding in findings]) )
+            
 
             except Exception as e:
                 print(e)

@@ -14,5 +14,5 @@ Good for the understanding of:
 
 1) GIT clone the repo
 2) CD into the virusTotal-ui-python folder 
-3) Type `pip install requirements.txt`
+3) Type `pip install -r requirements.txt`
 4) Type `python Main.py`

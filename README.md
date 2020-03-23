@@ -5,8 +5,11 @@ This project demonstrates how to build a VirusTotal client which is using the Vi
 Good for the understanding of:
 - REST API's
 - Basic security analysis concepts
-- UI programming with tkinter
+- UI programming with python & tkinter
 - Basic understanding of python classes
+- GIT branches, and the proper way to build your features using them
+
+The code is heavily documented and explains a lot of sotware engineering concepts such as re-use, maintainability and OOP. 
 
 
 

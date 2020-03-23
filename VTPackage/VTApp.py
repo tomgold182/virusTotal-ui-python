@@ -1,7 +1,10 @@
+# We are importing only the relevant libraries from tkinter
 import tkinter as tk
 from tkinter import Menu
 from tkinter import ttk
+
 from VTPackage import URLreportTab
+from VTPackage import IPReportTab
 from VTPackage import VTClient
 
 
@@ -19,15 +22,21 @@ class VTApp:
         self.menuBar.add_cascade(label="File", menu=self.fileMenu)
 
         def _quit():
-            self.root.quit()  # win will exist when this function is called
+            self.root.quit()  # The app  will exist when this function is called
             self.root.destroy()
             exit()
 
         self.fileMenu.add_command(label="Exit", command=_quit)  # command callback
         self.tabControl = ttk.Notebook(self.root)  # Create Tab Control
+
         self.urlFrame = ttk.Frame(self.tabControl)
         self.urlTab = URLreportTab.URLreportTab(self.root,self.urlFrame, self.vtClient)
-        self.tabControl.add(self.urlFrame,text = 'URL tab')
+        self.tabControl.add(self.urlFrame,text = 'URL')
+
+        self.ipFrame = ttk.Frame(self.tabControl)
+        self.ipTab = IPReportTab.IPreportTab(self.tabControl,self.ipFrame, self.vtClient)
+        self.tabControl.add(self.ipFrame, text = 'IP')
+
         self.tabControl.pack(expand=1, fill="both")  # Pack to make visible
 
     def start(self):

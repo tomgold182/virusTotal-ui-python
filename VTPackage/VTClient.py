@@ -4,10 +4,11 @@ import requests
 class VTClient:
     def __init__(self,apiKey):
         self.apiKey=apiKey
+        self.baseURI = 'https://www.virustotal.com/vtapi/v2/'  #We could have been just concating the url  to each request, but we want our code to be neat & re-usable
 
     def get_url_report(self,URL):
         try:
-            requestURL = f'https://www.virustotal.com/vtapi/v2/url/report?apikey={self.apiKey}&resource={URL}/'
+            requestURL = f'{self.baseURI}url/report?apikey={self.apiKey}&resource={URL}/'
             payload = {}
             headers = {}
             response = requests.request("GET", requestURL, headers=headers, data=payload)
@@ -18,5 +19,25 @@ class VTClient:
                 raise Exception(info["verbose_msg"])
             return info
         except Exception as e:
-            print(e)
-            raise Exception(e)
+            errMessage = f'Error while trying to get an URL report:{e}' # Instead of writing to error string twice, we are writing it once and using it twice.
+            print(errMessage)
+            raise Exception(errMessage)
+
+    def get_ip_report(self,ipAddress):
+        try:
+            requestURL = f'{self.baseURI}ip-address/report?apikey={self.apiKey}&ip={ipAddress}'
+            payload = {}
+            headers = {}
+            response = requests.request("GET", requestURL, headers=headers, data=payload)
+            if response.status_code == 204:
+                raise Exception("To much API requests")
+            info = response.json()
+            if info["response_code"] == 0:
+                raise Exception(info["verbose_msg"])
+            return info
+
+        except Exception as e:
+            errMessage = f'Error while trying to get an IP report:{e}'
+            print(errMessage)
+            raise Exception(errMessage)
+

@@ -31,11 +31,11 @@ class VTApp:
 
         self.urlFrame = ttk.Frame(self.tabControl)
         self.urlTab = URLreportTab.URLreportTab(self.root,self.urlFrame, self.vtClient)
-        self.tabControl.add(self.urlFrame,text = 'URL tab')
+        self.tabControl.add(self.urlFrame,text = 'URL')
 
         self.ipFrame = ttk.Frame(self.tabControl)
         self.ipTab = IPReportTab.IPreportTab(self.tabControl,self.ipFrame, self.vtClient)
-        self.tabControl.add(self.ipFrame, text = 'IP tab')
+        self.tabControl.add(self.ipFrame, text = 'IP')
 
         self.tabControl.pack(expand=1, fill="both")  # Pack to make visible
 

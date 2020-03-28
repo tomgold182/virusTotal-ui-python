@@ -4,6 +4,7 @@ from VTPackage import Consts
 
 
 
+
 class URLreportTab:
     def __init__(self,root,frame, vtClient):
         self.root = root
@@ -33,7 +34,9 @@ class URLreportTab:
 
         ttk.Label(self.notificationFrame, text="Errors:").grid(column=0, row=0, sticky='W')  # <== increment row for each
         Error = StringVar()
+        adding-global-consts
         ErrorEntry = ttk.Entry(self.notificationFrame, width=Consts.entry_width, textvariable=Error, state='readonly')
+
         ErrorEntry.grid(column=1, row=0, sticky='W')
 
         def _cleanErrorMessage():  # We could have been doing this without a function, but it is more neat that way
@@ -68,7 +71,7 @@ class URLreportTab:
 
         checkURLinVTButton = ttk.Button(self.mainVTURLframe, text='Check in VT!', command=_getReport).grid(column=2, row=0)
 
-        # Instead of setting padding for each UI element, we can just iterate through the children of the main UI object.
+        #Instead of setting padding for each UI element, we can just iterate through the children of the main UI object.
         for child in self.mainVTURLframe.winfo_children():
             child.grid_configure(padx=4, pady=2)
         for child in self.notificationFrame.winfo_children():

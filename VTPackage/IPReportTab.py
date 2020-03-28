@@ -39,13 +39,16 @@ class IPreportTab:
         numberOfDownloadedMaliciousFilesEntry = ttk.Entry(self.mainVTURLframe, width=Consts.entry_width, textvariable=numberOfDownloadedMaliciousFiles, state='readonly')
         numberOfDownloadedMaliciousFilesEntry.grid(column=1, row=4, sticky='W')
 
+        adding-global-consts
         self.notificationFrame = ttk.LabelFrame(self.frame, text=' Notifications', width=Consts.entry_width)
         # using the tkinter grid layout manager
         self.notificationFrame.grid(column=0, row=1, padx=8, pady=10, sticky='W')
 
         ttk.Label(self.notificationFrame, text="Errors:").grid(column=0, row=0, sticky='W')  # <== increment row for each
         Error = StringVar()
+        adding-global-consts
         ErrorEntry = ttk.Entry(self.notificationFrame, width=Consts.entry_width, textvariable=Error, state='readonly')
+
         ErrorEntry.grid(column=1, row=0, sticky='W')
 
         def _cleanErrorMessage():  # We could have been doing this without a function, but it is more neat that way
@@ -84,6 +87,5 @@ class IPreportTab:
             child.grid_configure(padx=4, pady=2)
         for child in self.notificationFrame.winfo_children():
             child.grid_configure(padx=4, pady=2)
-
 
 

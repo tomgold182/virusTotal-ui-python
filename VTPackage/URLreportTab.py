@@ -1,5 +1,8 @@
 from tkinter import ttk
 from tkinter import StringVar
+from VTPackage import Consts
+
+
 
 class URLreportTab:
     def __init__(self,root,frame, vtClient):
@@ -11,26 +14,26 @@ class URLreportTab:
         # using the tkinter grid layout manager
         self.mainVTURLframe.grid(column=0, row=0, padx=8, pady=4)
         ttk.Label(self.mainVTURLframe, text="URL:").grid(column=0, row=0, sticky='W')  #What does sticky does?      Sticky sayes where to stick the label to : N,S,E,W
-        urlEntry = ttk.Entry(self.mainVTURLframe)
+        urlEntry = ttk.Entry(self.mainVTURLframe,width = Consts.entry_width)
         urlEntry.grid(column=1, row=0, sticky='E')
 
         ttk.Label(self.mainVTURLframe, text="Positive Indications:").grid(column=0, row=1, sticky='W')  # <== right-align
         Positive = StringVar()
-        PositiveEntry = ttk.Entry(self.mainVTURLframe, width=20, textvariable=Positive, state='readonly')
+        PositiveEntry = ttk.Entry(self.mainVTURLframe, width=Consts.entry_width, textvariable=Positive, state='readonly')
         PositiveEntry.grid(column=1, row=1, sticky='W')
 
         ttk.Label(self.mainVTURLframe, text="Detections:").grid(column=0, row=2, sticky='W')  # <== right-align
         detections = StringVar()
-        detectionsEntry = ttk.Entry(self.mainVTURLframe, width=20, textvariable=detections, state='readonly')
+        detectionsEntry = ttk.Entry(self.mainVTURLframe, width=Consts.entry_width, textvariable=detections, state='readonly')
         detectionsEntry.grid(column=1, row=2, sticky='W')
 
-        notificationFrame = ttk.LabelFrame(self.frame, text=' Notifications', width=40)
+        self.notificationFrame = ttk.LabelFrame(self.frame, text=' Notifications', width=40)
         # using the tkinter grid layout manager
-        notificationFrame.grid(column=0, row=1, padx=8, pady=10, sticky='W')
+        self.notificationFrame.grid(column=0, row=1, padx=8, pady=10, sticky='W')
 
-        ttk.Label(notificationFrame, text="Errors:").grid(column=0, row=0, sticky='W')  # <== increment row for each
+        ttk.Label(self.notificationFrame, text="Errors:").grid(column=0, row=0, sticky='W')  # <== increment row for each
         Error = StringVar()
-        ErrorEntry = ttk.Entry(notificationFrame, width=20, textvariable=Error, state='readonly')
+        ErrorEntry = ttk.Entry(self.notificationFrame, width=Consts.entry_width, textvariable=Error, state='readonly')
         ErrorEntry.grid(column=1, row=0, sticky='W')
 
         def _cleanErrorMessage():  # We could have been doing this without a function, but it is more neat that way
@@ -64,5 +67,13 @@ class URLreportTab:
                 Error.set(e)
 
         checkURLinVTButton = ttk.Button(self.mainVTURLframe, text='Check in VT!', command=_getReport).grid(column=2, row=0)
+
+        # Instead of setting padding for each UI element, we can just iterate through the children of the main UI object.
+        for child in self.mainVTURLframe.winfo_children():
+            child.grid_configure(padx=4, pady=2)
+        for child in self.notificationFrame.winfo_children():
+            child.grid_configure(padx=4, pady=2)
+
+
 
 

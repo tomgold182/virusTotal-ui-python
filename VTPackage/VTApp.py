@@ -5,6 +5,8 @@ from tkinter import ttk
 
 from VTPackage import URLreportTab
 from VTPackage import IPReportTab
+from VTPackage import FileReportTab
+
 from VTPackage import VTClient
 
 
@@ -36,6 +38,10 @@ class VTApp:
         self.ipFrame = ttk.Frame(self.tabControl)
         self.ipTab = IPReportTab.IPreportTab(self.tabControl,self.ipFrame, self.vtClient)
         self.tabControl.add(self.ipFrame, text = 'IP')
+
+        self.fileFrame = ttk.Frame(self.tabControl)
+        self.fileTab = FileReportTab.FileReportTab(self.tabControl, self.fileFrame, self.vtClient)
+        self.tabControl.add(self.fileFrame, text='File')
 
         self.tabControl.pack(expand=1, fill="both")  # Pack to make visible
 

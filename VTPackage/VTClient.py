@@ -41,3 +41,30 @@ class VTClient:
             print(errMessage)
             raise Exception(errMessage)
 
+    def scan_file(self,filePath):
+        try:
+            requestUrl = f'{self.baseURI}file/scan'
+            params = {'apikey':self.apiKey}
+            files = {'file':(filePath,open(filePath,'rb'))}
+            response = requests.post(requestUrl,files=files, params=params)
+            info = response.json()
+            if info["response_code"] == 1:
+                return info['scan_id']
+
+        except Exception as e:
+            errMessage = f'Error while trying to scan file:{e}'
+            print(errMessage)
+            raise Exception(errMessage)
+
+    def get_file_report(self,scan_ID):
+        requestUrl = f'{self.baseURI}file/report'
+        params = {'apikey': self.apiKey,'resource': scan_ID}
+        resopnse = requests.get(requestUrl,params = params)
+
+
+
+
+
+
+
+

@@ -4,7 +4,7 @@ import requests
 class VTClient:
     def __init__(self,apiKey):
         self.apiKey=apiKey
-        self.baseURI = 'https://www.virustotal.com/vtapi/v2/'  #We could have been just concating the url  to each request, but we want our code to be neat & re-usable
+        self.baseURI = 'https://www.virustotal.com/vtapi/v2/'  #We could have been just concating the url to each request, but we want our code to be neat & re-usable
 
     def get_url_report(self,URL):
         try:
@@ -15,7 +15,7 @@ class VTClient:
             if response.status_code == 204:
                 raise Exception("To much API requests")
             info = response.json()
-            if info["response_code"] == 0:
+            if info["response_code"] == 0 :
                 raise Exception(info["verbose_msg"])
             return info
         except Exception as e:
@@ -32,7 +32,7 @@ class VTClient:
             if response.status_code == 204:
                 raise Exception("To much API requests")
             info = response.json()
-            if info["response_code"] == 0:
+            if info["response_code"] == 0 or info["response_code"] == -1:
                 raise Exception(info["verbose_msg"])
             return info
 

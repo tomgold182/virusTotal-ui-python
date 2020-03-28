@@ -1,5 +1,8 @@
 from tkinter import ttk
 from tkinter import StringVar
+from VTPackage import Consts
+
+
 
 
 class URLreportTab:
@@ -12,17 +15,17 @@ class URLreportTab:
         # using the tkinter grid layout manager
         self.mainVTURLframe.grid(column=0, row=0, padx=8, pady=4)
         ttk.Label(self.mainVTURLframe, text="URL:").grid(column=0, row=0, sticky='W')  #What does sticky does?      Sticky sayes where to stick the label to : N,S,E,W
-        urlEntry = ttk.Entry(self.mainVTURLframe)
+        urlEntry = ttk.Entry(self.mainVTURLframe,width = Consts.entry_width)
         urlEntry.grid(column=1, row=0, sticky='E')
 
         ttk.Label(self.mainVTURLframe, text="Positive Indications:").grid(column=0, row=1, sticky='W')  # <== right-align
         Positive = StringVar()
-        PositiveEntry = ttk.Entry(self.mainVTURLframe, width=20, textvariable=Positive, state='readonly')
+        PositiveEntry = ttk.Entry(self.mainVTURLframe, width=Consts.entry_width, textvariable=Positive, state='readonly')
         PositiveEntry.grid(column=1, row=1, sticky='W')
 
         ttk.Label(self.mainVTURLframe, text="Detections:").grid(column=0, row=2, sticky='W')  # <== right-align
         detections = StringVar()
-        detectionsEntry = ttk.Entry(self.mainVTURLframe, width=20, textvariable=detections, state='readonly')
+        detectionsEntry = ttk.Entry(self.mainVTURLframe, width=Consts.entry_width, textvariable=detections, state='readonly')
         detectionsEntry.grid(column=1, row=2, sticky='W')
 
         self.notificationFrame = ttk.LabelFrame(self.frame, text=' Notifications', width=40)
@@ -31,7 +34,9 @@ class URLreportTab:
 
         ttk.Label(self.notificationFrame, text="Errors:").grid(column=0, row=0, sticky='W')  # <== increment row for each
         Error = StringVar()
-        ErrorEntry = ttk.Entry(self.notificationFrame, width=60, textvariable=Error, state='readonly')
+        adding-global-consts
+        ErrorEntry = ttk.Entry(self.notificationFrame, width=Consts.entry_width, textvariable=Error, state='readonly')
+
         ErrorEntry.grid(column=1, row=0, sticky='W')
 
         def _cleanErrorMessage():  # We could have been doing this without a function, but it is more neat that way

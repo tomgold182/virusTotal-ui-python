@@ -1,6 +1,8 @@
 from tkinter import ttk
 from tkinter import StringVar
 
+from VTPackage import Consts
+
 
 class IPreportTab:
 
@@ -13,37 +15,40 @@ class IPreportTab:
         # using the tkinter grid layout manager
         self.mainVTURLframe.grid(column=0, row=0, padx=8, pady=4)
         ttk.Label(self.mainVTURLframe, text="IP:").grid(column=0, row=0, sticky='W')  # Sticky sayes where to stick the label to : N,S,E,W
-        ipEntry = ttk.Entry(self.mainVTURLframe)
+        ipEntry = ttk.Entry(self.mainVTURLframe,width = Consts.entry_width)
         ipEntry.grid(column=1, row=0, sticky='E')
 
 
         ttk.Label(self.mainVTURLframe, text="Country:").grid(column=0, row=1, sticky='W')  # <== right-align
         Country = StringVar()
-        CountryEntry = ttk.Entry(self.mainVTURLframe, width=20, textvariable=Country, state='readonly')
+        CountryEntry = ttk.Entry(self.mainVTURLframe, width=Consts.entry_width, textvariable=Country, state='readonly')
         CountryEntry.grid(column=1, row=1, sticky='W')
 
         ttk.Label(self.mainVTURLframe, text="Owner:").grid(column=0, row=2, sticky='W')  # <== right-align
         Owner = StringVar()
-        OwnerEntry = ttk.Entry(self.mainVTURLframe, width=20, textvariable=Owner, state='readonly')
+        OwnerEntry = ttk.Entry(self.mainVTURLframe, width=Consts.entry_width, textvariable=Owner, state='readonly')
         OwnerEntry.grid(column=1, row=2, sticky='W')
 
         ttk.Label(self.mainVTURLframe, text="Number of detected URLS:").grid(column=0, row=3, sticky='W')  # <== right-align
         numberOfDetectedUrls = StringVar()
-        numberOfDetectedUrlsEntry = ttk.Entry(self.mainVTURLframe, width=20, textvariable=numberOfDetectedUrls, state='readonly')
+        numberOfDetectedUrlsEntry = ttk.Entry(self.mainVTURLframe, width=Consts.entry_width, textvariable=numberOfDetectedUrls, state='readonly')
         numberOfDetectedUrlsEntry.grid(column=1, row=3, sticky='W')
 
         ttk.Label(self.mainVTURLframe, text="Number of detected malicious files:").grid(column=0, row=4, sticky='W')  # <== right-align
         numberOfDownloadedMaliciousFiles = StringVar()
-        numberOfDownloadedMaliciousFilesEntry = ttk.Entry(self.mainVTURLframe, width=20, textvariable=numberOfDownloadedMaliciousFiles, state='readonly')
+        numberOfDownloadedMaliciousFilesEntry = ttk.Entry(self.mainVTURLframe, width=Consts.entry_width, textvariable=numberOfDownloadedMaliciousFiles, state='readonly')
         numberOfDownloadedMaliciousFilesEntry.grid(column=1, row=4, sticky='W')
 
-        self.notificationFrame = ttk.LabelFrame(self.frame, text=' Notifications', width=40)
+        adding-global-consts
+        self.notificationFrame = ttk.LabelFrame(self.frame, text=' Notifications', width=Consts.entry_width)
         # using the tkinter grid layout manager
         self.notificationFrame.grid(column=0, row=1, padx=8, pady=10, sticky='W')
 
         ttk.Label(self.notificationFrame, text="Errors:").grid(column=0, row=0, sticky='W')  # <== increment row for each
         Error = StringVar()
-        ErrorEntry = ttk.Entry(self.notificationFrame, width=60, textvariable=Error, state='readonly')
+        adding-global-consts
+        ErrorEntry = ttk.Entry(self.notificationFrame, width=Consts.entry_width, textvariable=Error, state='readonly')
+
         ErrorEntry.grid(column=1, row=0, sticky='W')
 
         def _cleanErrorMessage():  # We could have been doing this without a function, but it is more neat that way

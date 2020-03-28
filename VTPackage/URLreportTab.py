@@ -34,7 +34,6 @@ class URLreportTab:
 
         ttk.Label(self.notificationFrame, text="Errors:").grid(column=0, row=0, sticky='W')  # <== increment row for each
         Error = StringVar()
-        adding-global-consts
         ErrorEntry = ttk.Entry(self.notificationFrame, width=Consts.entry_width, textvariable=Error, state='readonly')
 
         ErrorEntry.grid(column=1, row=0, sticky='W')

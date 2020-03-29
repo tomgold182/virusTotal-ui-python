@@ -45,7 +45,9 @@ class VTClient:
         try:
             requestUrl = f'{self.baseURI}file/scan'
             params = {'apikey':self.apiKey}
-            files = {'file':(filePath,open(filePath,'rb'))}
+            files = {
+                'file':(filePath,open(filePath,'rb'))
+            }
             response = requests.post(requestUrl,files=files, params=params)
             info = response.json()
             if info["response_code"] == 1:
@@ -57,9 +59,21 @@ class VTClient:
             raise Exception(errMessage)
 
     def get_file_report(self,scan_ID):
-        requestUrl = f'{self.baseURI}file/report'
-        params = {'apikey': self.apiKey,'resource': scan_ID}
-        resopnse = requests.get(requestUrl,params = params)
+        try:
+            requestUrl = f'{self.baseURI}file/report'
+            params = {'apikey': self.apiKey,'resource': scan_ID}
+            resopnse = requests.get(requestUrl,params = params)
+            if resopnse.status_code == 204:
+                raise Exception("To much API requests. Please wait a minute and try again")
+            if resopnse.status_code == 200:
+                return resopnse.json()
+            else:
+                print(resopnse.json())
+        except Exception as e:
+            errMessage = f'Error while trying to get scan report:{e}'
+            print(errMessage)
+            raise Exception(errMessage)
+
 
 
 

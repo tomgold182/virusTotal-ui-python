@@ -1,4 +1,10 @@
-# Some variables are being used across multiple parts of the application. In order to define them only once. A good example is the size of entry entry.
-# If we wouldn't have this Consts.py file, every time we will want to change the size of an entry, we will need to do it in more than 10 different places.
+# -*- coding: utf-8 -*-
+""" The global consts file
+
+Some constant values are being used across multiple parts of the application. A good example is the size of an entry in our UI .
+If we wouldn't have this Consts.py file, every time we will want to change the size of an entry, we will need to do it in more than 10 different places.
+a good practice is to define such constans once inside a file, and consume it from your different application parts
+"""
+
 
 entry_width = 50

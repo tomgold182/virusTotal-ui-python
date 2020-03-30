@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+"""This tab is in charge of sending sending IP addresses for investigation
+
+Some times, we will want the analyze certain IP address to understand if it is associated with malicious files or URLs
+VirusTotal gives us some useful information like where in the world this IP address hosted, and the amount of malicious
+files that was downloaded from it.
+"""
+
 from tkinter import ttk
 from tkinter import StringVar
 

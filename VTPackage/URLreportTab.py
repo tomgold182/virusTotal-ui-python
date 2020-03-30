@@ -1,8 +1,13 @@
+# -*- coding: utf-8 -*-
+"""This tab is in charge of sending sending URLs for investigation
+
+VirusTotal gives us the ability to send a suspicious URL to for analysis.
+It then returns the results as can be seen inside the code.
+"""
+
 from tkinter import ttk
 from tkinter import StringVar
 from VTPackage import Consts
-
-
 
 
 class URLreportTab:

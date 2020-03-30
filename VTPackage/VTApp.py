@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 """This is the main window of our application
 
-In order to make our code neat and scalable, we want to create one main page
-and a class for any other tab. In that way, we are achieving control over our UI
-contents, and making it much easier to adding new elements
+In order to make our code neat and scalable, we want to create one main page and a class for any other tab. 
+In that way, we are achieving control over our UI elements, while making sure it is easy to add new ones.
 """
 # We are importing only the relevant libraries from tkinter
 import tkinter as tk

@@ -5,6 +5,20 @@ class VTClient:
     def __init__(self,apiKey):
         self.apiKey=apiKey
         self.baseURI = 'https://www.virustotal.com/vtapi/v2/'  #We could have been just concating the url to each request, but we want our code to be neat & re-usable
+    def is_API_key_valid(self):
+        try:
+            requestURL = f'{self.baseURI}url/report?apikey={self.apiKey}&resource=www.google.com'
+            payload = {}
+            headers = {}
+            response = requests.request("GET", requestURL, headers=headers, data=payload)
+            if response.status_code == 403:
+                return False
+            else:
+                return True
+        except Exception as e:
+            errMessage = f'Error while trying to check the API key:{e}' # Instead of writing to error string twice, we are writing it once and using it twice.
+            print(errMessage)
+            raise Exception(errMessage)
 
     def get_url_report(self,URL):
         try:

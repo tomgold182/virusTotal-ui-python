@@ -7,8 +7,10 @@ contents, and making it much easier to adding new elements
 """
 # We are importing only the relevant libraries from tkinter
 import tkinter as tk
+import configparser
 from tkinter import Menu
 from tkinter import ttk
+from tkinter import messagebox
 
 from VTPackage import URLreportTab
 from VTPackage import IPReportTab
@@ -16,11 +18,18 @@ from VTPackage import FileReportTab
 
 from VTPackage import VTClient
 
+config = configparser.ConfigParser()
+config.read('config.ini')
 
 
 class VTApp:
     def __init__(self):
-        self.vtClient = VTClient.VTClient('95d362bc20946172c059611c765f7620da76f98ab4a202565b66cc4bafea9ed9')
+        #Loading the config file
+        self.config = configparser.ConfigParser()
+        self.config.read('config.ini')
+        self.virusTotalAPIkey = config['VirusTotal']['apiKey']
+
+        self.vtClient = VTClient.VTClient(self.virusTotalAPIkey)
         self.root = tk.Tk()
         self.root.title("Virus Total UI")
         self.menuBar = Menu()
@@ -29,6 +38,10 @@ class VTApp:
         self.fileMenu.add_command(label="New")
         self.fileMenu.add_separator()
         self.menuBar.add_cascade(label="File", menu=self.fileMenu)
+
+        if not self.vtClient.is_API_key_valid():
+            messagebox.showerror('Error', "API key is not valid! Check your config file")
+
 
         def _quit():
             self.root.quit()  # The app  will exist when this function is called

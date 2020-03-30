@@ -22,7 +22,7 @@ class VTApp:
     def __init__(self):
         self.vtClient = VTClient.VTClient('95d362bc20946172c059611c765f7620da76f98ab4a202565b66cc4bafea9ed9')
         self.root = tk.Tk()
-        self.root.title("VT App")
+        self.root.title("Virus Total UI")
         self.menuBar = Menu()
         self.root.config(menu=self.menuBar)
         self.fileMenu = Menu(self.menuBar, tearoff=0)

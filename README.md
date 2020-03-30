@@ -9,7 +9,7 @@ Good for the understanding of:
 - Basic security analysis concepts
 - UI programming with python & tkinter
 - The difference between sync & async operations
-- Basic understanding of python classes
+- Python classes
 - GIT branches, and the proper way to build your features using them
 
 Designed for software engineers who are interested in cyber security, and cyber security engineers who are interested in software engineering :)

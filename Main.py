@@ -1,4 +1,4 @@
-from VTPackage import VTApp
+from AppUI.VTApp import VTApp
 
-vtApp = VTApp.VTApp()
+vtApp = VTApp()
 vtApp.start()

@@ -17,7 +17,7 @@ from tkinter import messagebox
 from tkinter import ttk
 from tkinter import StringVar
 
-from VTPackage import Consts
+from AppUI import Consts
 
 
 class FileReportTab:

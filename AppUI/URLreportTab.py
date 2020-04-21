@@ -7,7 +7,7 @@ It then returns the results as can be seen inside the code.
 
 from tkinter import ttk
 from tkinter import StringVar
-from VTPackage import Consts
+from AppUI import Consts
 
 
 class URLreportTab:

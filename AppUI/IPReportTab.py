@@ -10,15 +10,22 @@ and the amount of malicious files that was downloaded from it.
 from tkinter import ttk
 from tkinter import StringVar
 
-from VTPackage import Consts
+from AppUI import Consts
+
+from SecurityClients.ShodanClient import  ShodanClient
+from SecurityClients.VTClient import VTClient
+
 
 
 class IPreportTab:
 
-    def __init__(self, root, frame, vtClient):
+    def __init__(self, root, frame, securityClients):
         self.root = root
         self.frame = frame
         self.mainVTURLframe = ttk.LabelFrame(frame, text=' IP report tab!')
+
+        self.vtClient : VTClient = securityClients[0]
+        self.shodanClient: ShodanClient = securityClients[1]
 
         # using the tkinter grid layout manager
         self.mainVTURLframe.grid(column=0, row=0, padx=8, pady=4)
@@ -46,6 +53,11 @@ class IPreportTab:
         numberOfDownloadedMaliciousFilesEntry = ttk.Entry(self.mainVTURLframe, width=Consts.ENTRY_WIDTH, textvariable=numberOfDownloadedMaliciousFiles, state='readonly')
         numberOfDownloadedMaliciousFilesEntry.grid(column=1, row=4, sticky='W')
 
+        ttk.Label(self.mainVTURLframe, text="Open ports:").grid(column=0, row=5, sticky='W')  # <== right-align
+        openPorts = StringVar()
+        openPortsEntry = ttk.Entry(self.mainVTURLframe, width=Consts.ENTRY_WIDTH, textvariable=openPorts, state='readonly')
+        openPortsEntry.grid(column=1, row=5, sticky='W')
+
         self.notificationFrame = ttk.LabelFrame(self.frame, text=' Notifications', width=Consts.ENTRY_WIDTH)
         # using the tkinter grid layout manager
         self.notificationFrame.grid(column=0, row=1, padx=8, pady=10, sticky='W')
@@ -70,12 +82,17 @@ class IPreportTab:
                     return
 
                 ipToCheck = ipEntry.get()
-                response = vtClient.get_ip_report(ipToCheck)
-                print(response)
-                Country.set(response["country"])
-                Owner.set(response["as_owner"])
-                numberOfDetectedUrls.set(len(response["detected_urls"]))  # len helps us count the amount of items inside the list
-                numberOfDownloadedMaliciousFiles.set(len(response["detected_downloaded_samples"]))
+
+                vtResponse = self.vtClient.get_ip_report(ipToCheck)
+                Country.set(vtResponse["country"])
+                Owner.set(vtResponse["as_owner"])
+                numberOfDetectedUrls.set(len(vtResponse["detected_urls"]))  # len helps us count the amount of items inside the list
+                numberOfDownloadedMaliciousFiles.set(len(vtResponse["detected_downloaded_samples"]))
+
+                shodanResponse = self.shodanClient.get_ip_info(ipToCheck)
+                openPorts.set(shodanResponse['ports'])
+
+
 
             except Exception as e:
                 print(e)

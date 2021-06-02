@@ -4,5 +4,5 @@ decorator==4.4.2
 idna==2.9
 requests==2.23.0
 six==1.14.0
-urllib3==1.25.8
+urllib3==1.26.5
 validators==0.14.2
